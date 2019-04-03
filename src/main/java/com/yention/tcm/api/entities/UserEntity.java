@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Column;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -80,12 +80,17 @@ public class UserEntity {
 		this.wxNickName = wxNickName;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "role_id")
-	private RoleEntity role;
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_group_id")
+	private UserGroupEntity userGroup;
+	
+	public UserGroupEntity getUserGroup(){
+		return userGroup;
+	}
 
-	@Transient
-	private String token;
+	public void setUserGroup(UserGroupEntity userGroup){
+		this.userGroup = userGroup;
+	}
 	
 	public String getCellPhoneNum(){
 		return cellPhoneNum;
@@ -101,22 +106,6 @@ public class UserEntity {
 	 
 	public void setEmail(String email){
 		this.email = email;
-	}
-	
-	public String getToken(){
-		return token;
-	}
-	 
-	public void setToken(String token){
-		this.token = token;
-	}
-
-	public RoleEntity getRole(){
-		return role;
-	}
-	 
-	public void setRole(RoleEntity role){
-		this.role = role;
 	}
 	
 	
