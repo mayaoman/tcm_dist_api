@@ -44,6 +44,17 @@ public class UserEntity {
 
 	@Column(length=8)
 	private int sex;
+
+	@Column(length=512)
+	private String headImgUrl;
+	
+	public String getHeadImgUrl(){
+		return headImgUrl;
+	}
+	 
+	public void setHeadImgUrl(String headImgUrl){
+		this.headImgUrl = headImgUrl;
+	}
 	
 	public int getSex(){
 		return sex;
