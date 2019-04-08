@@ -13,6 +13,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+// import org.springframework.security.core.userdetails.UserDetails;
+// import org.springframework.security.core.GrantedAuthority;
+// import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 
 @Entity
@@ -81,16 +84,17 @@ public class UserEntity {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_group_id")
-	private UserGroupEntity userGroup;
+    @JoinColumn(name = "role_id")
+	private RoleEntity role;
 	
-	public UserGroupEntity getUserGroup(){
-		return userGroup;
+	public RoleEntity getRole(){
+		return role;
 	}
-
-	public void setUserGroup(UserGroupEntity userGroup){
-		this.userGroup = userGroup;
+	 
+	public void setRole(RoleEntity role){
+		this.role = role;
 	}
+	
 	
 	public String getCellPhoneNum(){
 		return cellPhoneNum;

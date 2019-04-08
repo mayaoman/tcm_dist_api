@@ -6,13 +6,14 @@ import javax.persistence.Id;
 import javax.persistence.Column;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.FetchType;
 import javax.persistence.CascadeType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.util.List;
 
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class , property = "id") 
@@ -26,16 +27,17 @@ public class RoleEntity {
 	@Column(length=64)
 	private String name;
 
-	@OneToOne(mappedBy="userGroup")
-	private UserGroupEntity userGroup;
+	@OneToMany(mappedBy="role", cascade = CascadeType.ALL)
+	private List<UserEntity> users;
 	
-	public UserGroupEntity getUserGroup(){
-		return userGroup;
+	public List<UserEntity> getUsers(){
+		return users;
 	}
 	 
-	public void setUserGroup(UserGroupEntity userGroup){
-		this.userGroup = userGroup;
+	public void setUsers(List<UserEntity> users){
+		this.users = users;
 	}
+	
 	
 	public String getName(){
 		return name;
