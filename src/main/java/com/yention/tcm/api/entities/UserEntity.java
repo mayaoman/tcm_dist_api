@@ -13,9 +13,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-// import org.springframework.security.core.userdetails.UserDetails;
-// import org.springframework.security.core.GrantedAuthority;
-// import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 
 @Entity
@@ -30,7 +27,7 @@ public class UserEntity {
 	@Column(length=128)
 	private String username;
 
-	@Column(length=128)
+	@Column(length=256)
 	private String password;
 
 	@Column(length=128)
@@ -46,7 +43,7 @@ public class UserEntity {
 	private String wxOpenId;
 
 	@Column(length=8)
-	private int sex;
+	private Integer sex;
 
 	@Column(length=512)
 	private String headImgUrl;
@@ -59,11 +56,11 @@ public class UserEntity {
 		this.headImgUrl = headImgUrl;
 	}
 	
-	public int getSex(){
+	public Integer getSex(){
 		return sex;
 	}
 	 
-	public void setSex(int sex){
+	public void setSex(Integer sex){
 		this.sex = sex;
 	}
 	
@@ -83,7 +80,8 @@ public class UserEntity {
 		this.wxNickName = wxNickName;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	// @ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
     @JoinColumn(name = "role_id")
 	private RoleEntity role;
 	

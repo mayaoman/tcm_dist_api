@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>测试</title>
+  <!-- <base href="/tcm-api"> -->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script type="text/javascript" src="jquery.min.js"></script>
+  <script type="text/javascript" src="json3.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#loginBtn").click(function(){
+		var body = {
+			username: $("#username").val(),
+			password: $("#password").val()
+		}
+		console.log(body)
+		$.ajax({
+			url: "./user/login", 
+			data: body, 
+			method:'post',
+			success:function(data){
+				$("#loginResponseBox").text(JSON.stringify(data));
+				doTestApi(data.data.token);
+			},
+			error: function(xmlHttp) {
+				$("#loginResponseBox").text(xmlHttp.responseText);
+			}
+		})
+	})
+
+	function doTestApi(token) {
+		$.ajax({
+			url: "./user/list",
+			method:'get',
+			headers: {
+		        Authorization: token
+		    },
+			success:function(data){
+				$("#testResponseBox").text(JSON.stringify(data));
+			},
+			error: function(xmlHttp) {
+				$("#testResponseBox").text(xmlHttp.responseText);
+			}
+		})
+	}
+})
+</script>
+</head>
+<body>
+<input type="text" id="username" name="username" />
+<input type="password" id="password" name="password" />
+<button id="loginBtn">登 录</button>
+
+<div id="loginResponseBox" style="max-width: 100%;word-break:break-all;">
+	
+</div>
+
+<p>request /user/list...</p>
+<div id="testResponseBox" style="max-width: 100%;word-break:break-all;">
+	
+</div>
+</body>
+</html>

@@ -17,7 +17,7 @@ import java.util.List;
 
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class , property = "id") 
-@JsonIgnoreProperties(value={"handler", "hibernateLazyInitializer"})
+@JsonIgnoreProperties(value={"handler", "hibernateLazyInitializer","users"})
 @Table(name="tcm_role")
 public class RoleEntity {
 	@Id
@@ -27,7 +27,7 @@ public class RoleEntity {
 	@Column(length=64)
 	private String name;
 
-	@OneToMany(mappedBy="role", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="role", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<UserEntity> users;
 	
 	public List<UserEntity> getUsers(){
