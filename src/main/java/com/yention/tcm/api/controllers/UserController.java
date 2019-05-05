@@ -5,13 +5,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PathVariable;
 import com.yention.tcm.api.entities.UserEntity;
 import java.util.Map;
 import java.util.List;
-import org.springframework.http.MediaType;
-import javax.servlet.http.HttpSession;
 import com.yention.tcm.api.services.UserService;
+import com.yention.tcm.api.utils.GenerateID;
+
 import org.springframework.security.core.AuthenticationException;
 import com.yention.tcm.api.domains.ResultResponse;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -35,6 +34,24 @@ public class UserController {
     public @ResponseBody ResultResponse<Map<String, Object>> login(String username, String password) throws AuthenticationException {
         Map<String, Object> result = userService.login(username, password);
         return new ResultResponse<Map<String, Object>>(result);
+    }
+    
+    /**
+     * @Title: addUser
+     * @Description: 微信公众号扫码新增用户
+     * @param user
+     * @return boolean   
+     */
+    @RequestMapping(path="/addUser", method=RequestMethod.POST)
+    public @ResponseBody boolean addUser(@RequestBody UserEntity user) {
+		System.out.println(user.getWxOpenId());
+		System.out.println(user.getWxNickName());
+		System.out.println(user.getHeadImgUrl());
+		System.out.println(user.getSex());
+		String id = GenerateID.getID();
+		user.setId(id);
+		boolean result = userService.save(user);
+        return result;
     }
 
     // @RequestMapping(path="/password", method=RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
