@@ -3,6 +3,8 @@ package com.yention.tcm.api.entities;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -35,8 +37,11 @@ public class OrderEntity {
 	/**
 	 * 就诊人ID
 	 */
-	@Column(length=20)
-	private String patientId;
+//	@Column(length=20)
+//	private String patientId;
+	@OneToOne
+	@JoinColumn(name = "patientId")
+	private PatientEntity patient;
 	/**
 	 * 诊断信息
 	 */
@@ -93,6 +98,12 @@ public class OrderEntity {
 	@Column(length=20)
 	private String actual;
 	
+	public PatientEntity getPatient() {
+		return patient;
+	}
+	public void setPatient(PatientEntity patient) {
+		this.patient = patient;
+	}
 	public String getOrderId() {
 		return orderId;
 	}
@@ -105,12 +116,12 @@ public class OrderEntity {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public String getPatientId() {
-		return patientId;
-	}
-	public void setPatientId(String patientId) {
-		this.patientId = patientId;
-	}
+//	public String getPatientId() {
+//		return patientId;
+//	}
+//	public void setPatientId(String patientId) {
+//		this.patientId = patientId;
+//	}
 	public String getDiagnose() {
 		return diagnose;
 	}

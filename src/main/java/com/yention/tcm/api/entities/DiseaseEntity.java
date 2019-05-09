@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class , property = "diseaseId") 
 @JsonIgnoreProperties(value={"handler", "hibernateLazyInitializer"})
-@Table(name="tcm_patient")
+@Table(name="tcm_disease")
 public class DiseaseEntity {
 	/**
 	 * 病症ID

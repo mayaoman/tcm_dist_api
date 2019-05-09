@@ -3,10 +3,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -139,4 +144,15 @@ public class UserEntity {
 	public UserEntity() {
 
 	}
+	
+//	@OneToMany(mappedBy="user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//	private List<AddressEntity> addressList;
+//
+//	public List<AddressEntity> getAddressList() {
+//		return addressList;
+//	}
+//
+//	public void setAddressList(List<AddressEntity> addressList) {
+//		this.addressList = addressList;
+//	}
 }

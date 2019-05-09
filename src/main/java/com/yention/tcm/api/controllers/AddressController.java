@@ -23,7 +23,7 @@ import com.yention.tcm.api.services.AddressService;
 @RequestMapping("/address")
 public class AddressController {
 	@Autowired
-	AddressService addressService;
+	private AddressService addressService;
 	
 	/**
 	 * @Title: add

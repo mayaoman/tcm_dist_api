@@ -21,4 +21,12 @@ public interface UserRepository extends JpaRepository<UserEntity, String>{
 	public List<UserEntity> getUserList();
 
 	public UserEntity findFirstByOrderById();
+	
+	/**
+	 * @Title: findByWxOpenId
+	 * @Description: 根据微信号获取用户信息
+	 * @param wxOpenId
+	 * @return UserEntity   
+	 */
+	public UserEntity findByWxOpenId(String wxOpenId);
 }

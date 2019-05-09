@@ -1,8 +1,11 @@
 package com.yention.tcm.api.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yention.tcm.api.entities.DoctorEntity;
 import com.yention.tcm.api.repositories.DoctorRepository;
 
 /** 
@@ -16,4 +19,23 @@ import com.yention.tcm.api.repositories.DoctorRepository;
 public class DoctorService {
 	@Autowired
 	private DoctorRepository doctorRepository;
+	
+	/**
+	 * @Title: queryAllDoctor
+	 * @Description: 获取所有医生列表
+	 * @return List<DoctorEntity>   
+	 */
+	public List<DoctorEntity> queryAllDoctor(){
+		return doctorRepository.findAll();
+	}
+	
+	/**
+	 * @Title: queryDoctorByDisease
+	 * @Description: 根据擅长的病症获取医生
+	 * @param diseaseId
+	 * @return List<DoctorEntity>   
+	 */
+	public List<DoctorEntity> queryDoctorByDisease(String diseaseId){
+		return null;
+	}
 }

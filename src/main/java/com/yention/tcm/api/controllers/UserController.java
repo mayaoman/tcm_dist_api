@@ -44,14 +44,21 @@ public class UserController {
      */
     @RequestMapping(path="/addUser", method=RequestMethod.POST)
     public @ResponseBody boolean addUser(@RequestBody UserEntity user) {
-		System.out.println(user.getWxOpenId());
-		System.out.println(user.getWxNickName());
-		System.out.println(user.getHeadImgUrl());
-		System.out.println(user.getSex());
 		String id = GenerateID.getID();
 		user.setId(id);
 		boolean result = userService.save(user);
         return result;
+    }
+    
+    /**
+     * @Title: getUserByOpenId
+     * @Description: 根据微信号获取用户信息
+     * @param openid
+     * @return UserEntity   
+     */
+    @RequestMapping(path="/getUserByOpenId", method=RequestMethod.GET)
+    public @ResponseBody UserEntity getUserByOpenId(String openid){
+    	return userService.findByWxOpenId(openid);
     }
 
     // @RequestMapping(path="/password", method=RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)

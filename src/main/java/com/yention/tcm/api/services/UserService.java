@@ -86,5 +86,15 @@ public class UserService {
 		this.userRepository.updatePassword(password, id);
 		return true;
 	}
+	
+	/**
+	 * @Title: findByWxOpenId
+	 * @Description: 根据微信号获取用户信息
+	 * @param wxOpenId
+	 * @return UserEntity   
+	 */
+	public UserEntity findByWxOpenId(String wxOpenId){
+		return userRepository.findByWxOpenId(wxOpenId);
+	}
 }
 
