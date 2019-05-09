@@ -1,25 +1,23 @@
 package com.yention.tcm.api.controllers;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.fastjson.JSON;
 import com.yention.tcm.api.entities.OrderEntity;
-import com.yention.tcm.api.services.AddressService;
 import com.yention.tcm.api.services.OrderService;
 
 /** 
  * @Package com.yention.tcm.api.controllers
  * @ClassName: OrderController
- * @Description: TODO(这里用一句话描述这个类的作用)
+ * @Description: 用户订单核心控制类
  * @author 孙刚
  * @date 2019年4月19日 上午10:38:46
  */
@@ -36,26 +34,20 @@ public class OrderController {
 	 * @return List<Map<String,Object>>   
 	 */
 	@RequestMapping(path="/list", method=RequestMethod.GET)
-    public @ResponseBody List<Map<String,Object>> getOrderList(String openid) {
+    public @ResponseBody Map<String,Object> getOrderList(String openid) {
 		
-		List<OrderEntity> orders = orderService.findByUserIdAndStatus(openid, "1");
-		for(OrderEntity order:orders){
-			System.out.println("orderid:"+order.getOrderId());
-			System.out.println("Patient.getName:"+order.getPatient().getName());
-		}
+		List<OrderEntity> dfkOrders = orderService.findByUserIdAndStatus(openid, "待付款");
+		List<OrderEntity> dshOrders = orderService.findByUserIdAndStatus(openid, "待收货");
+		List<OrderEntity> ywcOrders = orderService.findByUserIdAndStatus(openid, "已完成");
+		List<OrderEntity> allOrders = orderService.findByUserId(openid);
 		
 		System.out.println("openid:"+openid);
-		List<Map<String,Object>> orderList = new ArrayList<Map<String,Object>>();
-		Map<String,Object> order1 = new HashMap<String,Object>();
-		order1.put("name", "order1");
-		order1.put("pri", "123");
-		order1.put("desc", "沙发垫我问问");
-		Map<String,Object> order2 = new HashMap<String,Object>();
-		order2.put("name", "order2");
-		order2.put("pri", "12333");
-		order2.put("desc", "aaad我问问");
-		orderList.add(order1);
-		orderList.add(order2);
+		Map<String,Object> orderList = new HashMap<String,Object>();
+		orderList.put("ywc", JSON.toJSON(ywcOrders));
+		orderList.put("all", JSON.toJSON(allOrders));
+		orderList.put("dfk", JSON.toJSON(dfkOrders));
+		orderList.put("dsh", JSON.toJSON(dshOrders));
+		System.out.println("ywcOrders:"+JSON.toJSON(orderList));
         return orderList;
     }
 }

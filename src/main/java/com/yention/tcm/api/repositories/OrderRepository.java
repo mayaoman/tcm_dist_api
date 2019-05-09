@@ -23,4 +23,12 @@ public interface OrderRepository extends JpaRepository<OrderEntity, String> {
 	 * @return List<OrderEntity>   
 	 */
 	public List<OrderEntity> findByUserIdAndStatus(String userId,String status);
+	
+	/**
+	 * @Title: findByUserId
+	 * @Description: 根据用户查询全部订单
+	 * @param userId
+	 * @return List<OrderEntity>   
+	 */
+	public List<OrderEntity> findByUserId(String userId);
 }

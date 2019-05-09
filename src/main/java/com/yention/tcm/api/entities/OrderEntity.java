@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -60,8 +61,11 @@ public class OrderEntity {
 	/**
 	 * 问诊医师
 	 */
-	@Column(length=20)
-	private String doctorId;
+//	@Column(length=20)
+//	private String doctorId;
+	@ManyToOne
+	@JoinColumn(name="doctorId")
+	private DoctorEntity doctor;
 	/**
 	 * 下单时间
 	 */
@@ -140,11 +144,11 @@ public class OrderEntity {
 	public void setOrderName(String orderName) {
 		this.orderName = orderName;
 	}
-	public String getDoctorId() {
-		return doctorId;
+	public DoctorEntity getDoctor() {
+		return doctor;
 	}
-	public void setDoctorId(String doctorId) {
-		this.doctorId = doctorId;
+	public void setDoctor(DoctorEntity doctor) {
+		this.doctor = doctor;
 	}
 	public String getCreateTime() {
 		return createTime;

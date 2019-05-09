@@ -30,4 +30,14 @@ public class OrderService {
 	public List<OrderEntity> findByUserIdAndStatus(String userId,String status){
 		return orderRepository.findByUserIdAndStatus(userId, status);
 	}
+	
+	/**
+	 * @Title: findByUserId
+	 * @Description: 根据用户查询全部订单
+	 * @param userId
+	 * @return List<OrderEntity>   
+	 */
+	public List<OrderEntity> findByUserId(String userId){
+		return orderRepository.findByUserId(userId);
+	}
 }
