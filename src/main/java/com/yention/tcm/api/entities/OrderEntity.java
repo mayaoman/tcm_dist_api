@@ -33,7 +33,7 @@ public class OrderEntity {
 	/**
 	 * 用户ID
 	 */
-	@Column(length=20)
+	@Column(length=50)
 	private String userId;
 	/**
 	 * 就诊人ID

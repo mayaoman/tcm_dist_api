@@ -30,7 +30,7 @@ public class PatientEntity {
 	/**
 	 * 用户ID
 	 */
-	@Column(length=20)
+	@Column(length=50)
 	private String userId;
 	/**
 	 * 与本人关系

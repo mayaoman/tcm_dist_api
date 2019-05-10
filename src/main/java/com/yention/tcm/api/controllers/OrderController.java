@@ -22,7 +22,7 @@ import com.yention.tcm.api.services.OrderService;
  * @date 2019年4月19日 上午10:38:46
  */
 @RestController
-@RequestMapping("/order")
+@RequestMapping("/wechat/order")
 public class OrderController {
 	@Autowired
 	private OrderService orderService;
