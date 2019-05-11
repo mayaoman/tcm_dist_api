@@ -50,4 +50,15 @@ public class OrderController {
 		System.out.println("ywcOrders:"+JSON.toJSON(orderList));
         return orderList;
     }
+	
+	/**
+	 * @Title: getOrderById
+	 * @Description: 根据订单编号获取订单详情
+	 * @param orderId
+	 * @return OrderEntity   
+	 */
+	@RequestMapping(path="/getOrderById", method=RequestMethod.GET)
+    public @ResponseBody OrderEntity getOrderById(String orderId) {
+        return orderService.getOrderById(orderId);
+    }
 }
