@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import com.yention.tcm.api.entities.DoctorEntity;
 import com.yention.tcm.api.entities.UserEntity;
 import java.util.Map;
 import java.util.List;
@@ -59,6 +61,18 @@ public class UserController {
     @RequestMapping(path="/getUserByOpenId", method=RequestMethod.GET)
     public @ResponseBody UserEntity getUserByOpenId(String openid){
     	return userService.findByWxOpenId(openid);
+    }
+    
+    /**
+     * @Title: getMyDoctor
+     * @Description: 获取我的医生列表
+     * @param openid
+     * @return List<DoctorEntity>   
+     */
+    @RequestMapping(path="/getMyDoctor", method=RequestMethod.GET)
+    public @ResponseBody List<DoctorEntity> getMyDoctor(String openid){
+    	UserEntity user = userService.findByWxOpenId(openid);
+    	return user.getDoctorList();
     }
 
     // @RequestMapping(path="/password", method=RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)

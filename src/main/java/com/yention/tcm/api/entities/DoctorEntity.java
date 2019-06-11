@@ -76,6 +76,15 @@ public class DoctorEntity {
     @JoinTable(name = "tcm_doctor_disease",joinColumns = @JoinColumn(name = "doctorId"),inverseJoinColumns = @JoinColumn(name = "diseaseId"))
     private List<DiseaseEntity> diseaseList;
 	
+	@ManyToMany(mappedBy = "doctorList")
+    private List<UserEntity> userList;
+	
+	public List<UserEntity> getUserList() {
+		return userList;
+	}
+	public void setUserList(List<UserEntity> userList) {
+		this.userList = userList;
+	}
 	public List<DiseaseEntity> getDiseaseList() {
 		return diseaseList;
 	}

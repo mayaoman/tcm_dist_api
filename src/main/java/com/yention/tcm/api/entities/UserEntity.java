@@ -1,7 +1,5 @@
 package com.yention.tcm.api.entities;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import java.util.List;
@@ -9,19 +7,15 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class , property = "id") 
 @JsonIgnoreProperties(value={"handler", "hibernateLazyInitializer"})
 @Table(name="tcm_user")
 public class UserEntity {
@@ -53,6 +47,19 @@ public class UserEntity {
 	@Column(length=512)
 	private String headImgUrl;
 	
+	@JsonIgnoreProperties(value = { "userList" })
+	@ManyToMany(cascade = CascadeType.DETACH)
+    @JoinTable(name = "tcm_user_doctor",joinColumns = @JoinColumn(name = "userId"),inverseJoinColumns = @JoinColumn(name = "doctorId"))
+    private List<DoctorEntity> doctorList;
+	
+	public List<DoctorEntity> getDoctorList() {
+		return doctorList;
+	}
+
+	public void setDoctorList(List<DoctorEntity> doctorList) {
+		this.doctorList = doctorList;
+	}
+
 	public String getHeadImgUrl(){
 		return headImgUrl;
 	}
