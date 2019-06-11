@@ -30,12 +30,12 @@ public class DoctorService {
 	}
 	
 	/**
-	 * @Title: queryDoctorByDisease
-	 * @Description: 根据擅长的病症获取医生
-	 * @param diseaseId
-	 * @return List<DoctorEntity>   
+	 * @Title: queryDoctorById
+	 * @Description: 查询医生详情
+	 * @param doctorId
+	 * @return DoctorEntity   
 	 */
-	public List<DoctorEntity> queryDoctorByDisease(String diseaseId){
-		return null;
+	public DoctorEntity queryDoctorById(String doctorId){
+		return doctorRepository.getOne(doctorId);
 	}
 }

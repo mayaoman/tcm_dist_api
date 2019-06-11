@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yention.tcm.api.entities.DeptEntity;
 import com.yention.tcm.api.entities.DiseaseEntity;
+import com.yention.tcm.api.repositories.DeptRepository;
 import com.yention.tcm.api.repositories.DiseaseRepository;
 
 /** 
@@ -20,7 +22,25 @@ public class DiseaseService {
 	@Autowired
 	private DiseaseRepository diseaseRepository;
 	
-	public List<DiseaseEntity> queryAll(){
-		return diseaseRepository.findAll();
+	@Autowired
+	private DeptRepository deptRepository;
+	
+	/**
+	 * @Title: queryAll
+	 * @Description: 获取所有病症及科室
+	 * @return List<DeptEntity>   
+	 */
+	public List<DeptEntity> queryAll(){
+		return deptRepository.findAll();
+	}
+	
+	/**
+	 * @Title: findDiseaseById
+	 * @Description: 根据ID获取病症信息
+	 * @param diseaseId
+	 * @return DiseaseEntity   
+	 */
+	public DiseaseEntity findDiseaseById(String diseaseId){
+		return diseaseRepository.getOne(diseaseId);
 	}
 }

@@ -17,7 +17,6 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
  * @date 2019年4月26日 下午3:32:20
  */
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class , property = "id") 
 @JsonIgnoreProperties(value={"handler", "hibernateLazyInitializer"})
 @Table(name="tcm_my_doctor")
 public class MyDoctorEntity {

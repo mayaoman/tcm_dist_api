@@ -20,7 +20,6 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
  * @date 2019年4月26日 下午2:40:37
  */
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class , property = "orderId") 
 @JsonIgnoreProperties(value={"handler", "hibernateLazyInitializer"})
 @Table(name="tcm_order")
 public class OrderEntity {
